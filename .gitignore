@@ -1,0 +1,15 @@
+# Secrets: this project needs none, but keep it that way
+.env
+.env.*
+*.key
+*.pem
+# Your videos and outputs
+*.mp4
+*.mov
+*.mkv
+*.words.json
+*.srt
+# Python
+.venv/
+__pycache__/
+.DS_Store
