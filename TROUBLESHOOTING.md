@@ -16,3 +16,14 @@
 | Hindi / non-Latin captions show as boxes | Pick a font that includes those characters (e.g. Noto Sans, Mangal) via the font option. |
 
 Still stuck? Open an [Issue](../../issues) and paste the exact error text. Never paste anything that looks like a key or password.
+
+## Reel-engine problems
+
+| Problem | Fix |
+|---|---|
+| My face is sideways or upside down | Phone files are sometimes stored sideways. Set `"rotate"` in the spec to `cw` or `ccw` (Claude checks a still frame first) |
+| `ModuleNotFoundError: PIL` or `numpy` | Rerun the installer. It installs Pillow and numpy into the private environment |
+| `faster-whisper` crashes with `metadata_errors` | A too-new `av` library. The installer pins `av<17`; rerun it |
+| A sharp "ts" or "pop" in my voice | The skill compresses harsh highs automatically. If one survives, tell Claude the timestamp and it will treat that spot |
+| A notification banner shows in a screen cut-in | Tell Claude the second it appears. Cut-ins are chosen from clean seconds, and it can pick another |
+| Captions don't match what I said | Edit `talk.words.json` (fix the `word`, keep the times), or add a fix in the spec's `captions.merge` / `captions.replace` |

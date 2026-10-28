@@ -16,11 +16,11 @@ command -v python3 >/dev/null || { echo "Python 3 is missing. Install it from py
 
 echo "3/4 Creating private Python environment and installing faster-whisper..."
 python3 -m venv "$VENV"
-"$VENV/bin/pip" install --quiet --upgrade pip faster-whisper
+"$VENV/bin/pip" install --quiet --upgrade pip faster-whisper "av<17" pillow numpy
 
 echo "4/4 Installing the skill into Claude Code..."
 mkdir -p "$DEST"
-cp -R "$SKILL_SRC/SKILL.md" "$SKILL_SRC/scripts" "$DEST/"
+cp -R "$SKILL_SRC/SKILL.md" "$SKILL_SRC/scripts" "$SKILL_SRC/styles" "$DEST/"
 
 "$VENV/bin/python" "$DEST/scripts/vedit.py" check
 echo "Done. Open Claude Code and say: 'Edit ~/Downloads/myvideo.mp4 into a captioned reel.'"

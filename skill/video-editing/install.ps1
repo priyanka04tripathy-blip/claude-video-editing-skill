@@ -18,12 +18,13 @@ if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
 
 Write-Host "3/4 Creating private Python environment and installing faster-whisper..."
 python -m venv $venv
-& "$venv\Scripts\pip.exe" install --quiet --upgrade pip faster-whisper
+& "$venv\Scripts\pip.exe" install --quiet --upgrade pip faster-whisper "av<17" pillow numpy
 
 Write-Host "4/4 Installing the skill into Claude Code..."
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
 Copy-Item "$src\SKILL.md" $dest -Force
 Copy-Item "$src\scripts" $dest -Recurse -Force
+Copy-Item "$src\styles" $dest -Recurse -Force
 
 & "$venv\Scripts\python.exe" "$dest\scripts\vedit.py" check
 Write-Host "Done. Open Claude Code and say: 'Edit C:\Users\me\Videos\myvideo.mp4 into a captioned reel.'"

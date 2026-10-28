@@ -29,4 +29,16 @@ Start Claude Code in the folder that holds your video (`cd` there, then `claude`
 ## Make one command for the next time
 > Look at the edit we just did and write me a one-line prompt I can reuse for the next video.
 
+## A full reel, in your style (storyboards first)
+> Use the video-editing skill. Here is my talking video `talk.mp4` and my screen recording `screen.mp4`. Make a reel in my style. Show me three storyboards first and wait for me to pick.
+
+## Pick a storyboard
+> Go with B, but use A's hook. Title: "Cool ChatGPT tricks & shortcuts". Comment keyword: 200. Use your generated music.
+
+## Change something after you see it
+> Captions are too low, move them up, and make the music quieter. Save that to my style so it applies next time.
+
+## Create your own style from a reel you like
+> Use the video-editing skill. Here is a screen recording of a reel whose editing I like. Create a style called `my-style` from it: layout, caption look, pacing, sounds. Don't copy their branding.
+
 **Tip:** one edit at a time beats a giant prompt. Look at the result, then say what to change ("captions lower", "cut less").

@@ -35,6 +35,22 @@ COLORS = {
 }
 
 
+def ass_color(c):
+    """Colour name from COLORS, or a #RRGGBB hex code (brand colours)."""
+    if c in COLORS:
+        return COLORS[c]
+    m = re.fullmatch(r"#?([0-9a-fA-F]{6})", c)
+    if not m:
+        die(f"Unknown colour '{c}'. Use a name ({', '.join(COLORS)}) or a hex code like #FFF1A8.")
+    h = m.group(1).upper()
+    return h[4:6] + h[2:4] + h[0:2]
+
+
+def color_arg(c):
+    ass_color(c)
+    return c
+
+
 def die(msg):
     print(f"ERROR: {msg}", file=sys.stderr)
     sys.exit(1)
@@ -227,7 +243,7 @@ def esc(text):
 def build_caption_ass(words, w, h, style, per_line, font, size, color, hilite):
     size = size or int(w * 0.075)
     margin_v = int(h * 0.22)  # keep captions clear of the platform UI at the bottom
-    out = [ass_header(w, h, font, size, COLORS[color], COLORS["black"], True, 2, margin_v)]
+    out = [ass_header(w, h, font, size, ass_color(color), COLORS["black"], True, 2, margin_v)]
     for i in range(0, len(words), per_line):
         chunk = words[i:i + per_line]
         label = [esc(c["word"]).upper() if style != "clean" else esc(c["word"])
@@ -235,7 +251,7 @@ def build_caption_ass(words, w, h, style, per_line, font, size, color, hilite):
         if style == "highlight":
             for j, c in enumerate(chunk):
                 end = chunk[j + 1]["start"] if j + 1 < len(chunk) else c["end"]
-                parts = [f"{{\\c&H00{COLORS[hilite]}&}}{label[k]}{{\\c&H00{COLORS[color]}&}}"
+                parts = [f"{{\\c&H00{ass_color(hilite)}&}}{label[k]}{{\\c&H00{ass_color(color)}&}}"
                          if k == j else label[k] for k in range(len(chunk))]
                 out.append(f"Dialogue: 0,{ass_time(c['start'])},{ass_time(end)},Default,,"
                            f"0,0,0,,{' '.join(parts)}\n")
@@ -280,7 +296,7 @@ def cmd_overlay(a):
     align = {"top": 8, "center": 5, "bottom": 2}[a.position]
     margin_v = int(h * {"top": 0.12, "center": 0, "bottom": 0.22}[a.position])
     size = a.size or int(w * 0.07)
-    ass = ass_header(w, h, a.font, size, COLORS[a.color], COLORS["black"], True,
+    ass = ass_header(w, h, a.font, size, ass_color(a.color), COLORS["black"], True,
                      align, margin_v)
     ass += (f"Dialogue: 0,{ass_time(a.start)},{ass_time(end)},Default,,0,0,0,,"
             f"{esc(a.text)}\n")
@@ -345,8 +361,8 @@ def main():
                        default="highlight")
         p.add_argument("--words-per-line", type=int, default=3)
         p.add_argument("--font", default="Arial")
-        p.add_argument("--color", choices=COLORS, default="white")
-        p.add_argument("--highlight", choices=COLORS, default="yellow")
+        p.add_argument("--color", type=color_arg, default="white")
+        p.add_argument("--highlight", type=color_arg, default="yellow")
 
     def add_asr_opts(p):
         p.add_argument("--model", default="small",
@@ -384,7 +400,7 @@ def main():
     p.add_argument("--position", choices=["top", "center", "bottom"], default="top")
     p.add_argument("--size", type=int, default=None)
     p.add_argument("--font", default="Arial")
-    p.add_argument("--color", choices=COLORS, default="white")
+    p.add_argument("--color", type=color_arg, default="white")
     p.set_defaults(fn=cmd_overlay)
 
     p = sub.add_parser("export")

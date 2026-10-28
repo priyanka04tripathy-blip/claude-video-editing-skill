@@ -1,0 +1,40 @@
+{
+  "_comment": "Example edit spec. All times are SOURCE seconds in the raw talking video (the engine converts them after cuts + speed-up).",
+  "talk": "talk.mp4",
+  "screen": "screen.mp4",
+  "words": "talk.words.json",
+  "rotate": "ccw",
+  "face_x": 0.47,
+  "speed": 1.25,
+  "title": ["Cool ChatGPT", "tricks & shortcuts"],
+  "colors": { "butter": "#FFF1A8", "blue": "#BFD9F2", "navy": "#1F3A5F" },
+  "segments": [[1.00, 5.98], [6.54, 8.22], [12.40, 21.35], [34.40, 44.80], [48.38, 50.30], [50.85, 56.90]],
+  "commands": [
+    { "op": "type",  "text": "/billboard",       "at": 1.82 },
+    { "op": "erase", "at": 12.50 },
+    { "op": "type",  "text": "/foodshot",        "at": 13.56 },
+    { "op": "erase", "at": 21.40 },
+    { "op": "type",  "text": "/floatingproduct", "at": 36.68 },
+    { "op": "erase", "at_outro": 0.05 },
+    { "op": "type",  "text": "/200shortcuts",    "at_outro": 0.55 }
+  ],
+  "popups": [
+    { "start": 3.56, "end": 8.22, "phases": [
+        { "at": 3.56, "kind": "clip",  "screen_ss": 36.0, "dur": 2.2 },
+        { "at": 6.54, "kind": "still", "screen_ss": 39.3, "crop_y": [476, 804] } ] },
+    { "start": 16.60, "end": 21.35, "phases": [
+        { "at": 16.60, "kind": "clip",  "screen_ss": 26.0, "dur": 2.4 },
+        { "at": 19.30, "kind": "still", "screen_ss": 32.6, "crop_y": [256, 1024] } ] },
+    { "start": 36.68, "end": 44.80, "phases": [
+        { "at": 36.68, "kind": "clip",  "screen_ss": 43.0, "dur": 3.3 },
+        { "at": 40.96, "kind": "still", "screen_ss": 47.4, "crop_y": [280, 1000] } ] }
+  ],
+  "punches": [2.08, 14.62, 49.0, 53.88],
+  "captions": {
+    "max_words": 3,
+    "merge": { "chat gpd": "ChatGPT", "chat gpt": "ChatGPT", "slash food short": "/foodshot", "slash food shot": "/foodshot" },
+    "replace": { "dns": "DMs", "i'll": "I'll" }
+  },
+  "outro": { "length": 2.4, "headline": "Comment 200", "line1": "for 200+ ChatGPT shortcuts", "line2": "in your DMs", "handle": "@buildwithpri" },
+  "music": "generate"
+}

@@ -16,6 +16,17 @@ Tell Claude what you want in plain English. Get back an edited video.
 | "Make it a reel / LinkedIn post" | Exports at the right size: 9:16, 4:5, 1:1 or 16:9 |
 | "Do the whole thing" | Silence cut, captions and export in one pass |
 
+## Designed reels in your own style (new)
+
+For talking-head reels with screen demos, the skill works like an editor, not a filter:
+
+1. You give it your raw video (and a screen recording if you're demoing something).
+2. It **proposes three storyboards** (beat-by-beat: what you say, what's on screen, which cut-ins, which sounds) and tells you what it would cut.
+3. **You pick one** (or mix: "A's hook, C's ending"). Nothing is edited before that.
+4. It renders: speed-up, cleaned voice, typed command line, screen cut-ins over a blurred background, captions, music, sound effects, outro, in your saved style.
+
+Your look is saved in `skill/video-editing/styles/<your-style>/`, so every new video starts from the same style. The included `pri-reel` style is a complete example; ask Claude to "create my style from this reference reel" to make your own.
+
 ## What you need
 
 - A computer (Mac, Windows or Linux)
@@ -45,7 +56,7 @@ Then open Claude Code and describe the edit. Copy-paste prompts are in **[PROMPT
 
 ## Limits
 
-It edits by audio and text, not by looking at the picture. That means no face tracking (crops are centered), no B-roll insertion, no music and no color grading. Use `--fit blur` when a landscape clip would lose important parts to a center crop.
+It edits by audio and text, not by looking at the picture. That means no face tracking (the speaker window is centered on a face position you set), no B-roll library and no color grading. Music is either generated for you or an MP3 you supply. Use `--fit blur` when a landscape clip would lose important parts to a center crop.
 
 ## License
 
